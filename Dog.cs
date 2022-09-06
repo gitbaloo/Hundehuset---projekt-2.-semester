@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Hundehuset
 {
-    class Dog
     {
         public string pedigreeNumber { get; set; }
         public string name { get; set; }
