@@ -6,23 +6,24 @@ using System.Threading.Tasks;
 
 namespace Hundehuset
 {
+    public class Dog
     {
-        public string pedigreeNumber { get; set; }
-        public string name { get; set; }
-        public DateTime birthDate { get; set; }
-        public char sex { get; set; }
-        public int chipNumber { get; set; }
-        public double inbreedingCoefficient { get; set; }
-        public char hdStatus { get; set; }
-        public int hdIndex { get; set; }
-        public int spondylosisStatus { get; set; }
-        public int heartStatus { get; set; }
-        public string colour { get; set; }
-        public bool isAlive { get; set; }
-        public string momPedigreeNumber { get; set; }
-        public string dadPedigreeNumber { get; set; }
-        public string owner { get; set; }
-        public string breeder { get; set; }
+        public string PedigreeNumber { get; set; }
+        public string Name { get; set; }
+        public DateTime BirthDate { get; set; }
+        public char Sex { get; set; }
+        public int ChipNumber { get; set; }
+        public double InbreedingCoefficient { get; set; }
+        public char HdStatus { get; set; }
+        public int HdIndex { get; set; }
+        public int SpondylosisStatus { get; set; }
+        public int HeartStatus { get; set; }
+        public string Color { get; set; }
+        public bool IsAlive { get; set; }
+        public string MomPedigreeNumber { get; set; }
+        public string DadPedigreeNumber { get; set; }
+        public string Owner { get; set; }
+        public string Breeder { get; set; }
 
     }
 }
