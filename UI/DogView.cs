@@ -65,7 +65,7 @@ namespace Hundehuset.UI
                 while (correctSexInput == false)
                 {
                     Console.Write("Please enter sex (T for female and H for male): ");
-                    string inputSex = Console.ReadLine();
+                    string inputSex = Console.ReadLine().ToUpper();
 
                     if (string.IsNullOrEmpty(inputSex)) // there is no input
                     {
@@ -73,17 +73,12 @@ namespace Hundehuset.UI
                     }
                     else if (char.TryParse(inputSex, out sex)) // is it posible to parse the input to a char
                     {
-                        if (sex == 'h' || sex == 'H')
+                        if (sex == 'T' || sex == 'H')
                         {
-                            dog.Sex = 'H';
+                            dog.Sex = sex;
                             correctSexInput = true;
                         }
-                        else if (sex == 't' || sex == 'T')
-                        {
-                            dog.Sex = 'T';
-                            correctSexInput = true;
-                        }
-                        else // if the input can be converted, but is other than t, T, h or H
+                        else // if the input can be converted, but is other than T or H
                         {
                             Console.WriteLine("The entered sex is not in the propor format.");
                             continue; // goes back to the start of the while loop
@@ -242,12 +237,14 @@ namespace Hundehuset.UI
                     else if (isAliveInput == "YES")
                     {
                         dog.IsAlive = true;
+                        correctIsAliveInput = true;
                     }
                     else if (isAliveInput == "NO")
                     {
                         dog.IsAlive = false;
+                        correctIsAliveInput = true;
                     }
-                    else // the input is other than EMPTY, yes or no
+                    else // the input is other than EMPTY, YES or NO
                     {
                         Console.WriteLine("The entered input is not in the propor format.");
                         // and the while loop will start over
@@ -256,7 +253,7 @@ namespace Hundehuset.UI
 
                 //MomPedigreeNumber
                 Console.Write("Please enter pedigree number of the dog's mother: ");
-                dog.MomPedigreeNumber = Console.ReadLine().ToUpper();
+                dog.MomPedigreeNumber = Console.ReadLine();
 
                 //DadPedigreeNumber
                 Console.Write("Please enter pedigree number of the dog's father: ");
