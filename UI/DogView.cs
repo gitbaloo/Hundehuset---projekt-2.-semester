@@ -108,7 +108,7 @@ namespace Hundehuset.UI
                 while (correctHdStatusInput == false)
                 {
                     Console.Write("Please enter HD-status (A, B, C, D or E): ");
-                    string inputHdStatus = Console.ReadLine();
+                    string inputHdStatus = Console.ReadLine().ToUpper();
 
                     if (string.IsNullOrEmpty(inputHdStatus)) // there is no input
                     {
@@ -116,38 +116,18 @@ namespace Hundehuset.UI
                     }
                     else if (char.TryParse(inputHdStatus, out hdStatus)) // it is possible to parse the input to a char
                     {
-                        if (hdStatus == 'a' || hdStatus == 'A')
+                        if (hdStatus == 'A' || hdStatus == 'B' || hdStatus == 'C' || hdStatus == 'D' || hdStatus == 'E')
                         {
-                            dog.HdStatus = 'A';
+                            dog.HdStatus = hdStatus;
                             correctHdStatusInput = true;
                         }
-                        else if (hdStatus == 'b' || hdStatus == 'B')
-                        {
-                            dog.HdStatus = 'B';
-                            correctHdStatusInput = true;
-                        }
-                        else if (hdStatus == 'c' || hdStatus == 'C')
-                        {
-                            dog.HdStatus = 'C';
-                            correctHdStatusInput = true;
-                        }
-                        else if (hdStatus == 'd' || hdStatus == 'D')
-                        {
-                            dog.HdStatus = 'D';
-                            correctHdStatusInput = true;
-                        }
-                        else if (hdStatus == 'e' || hdStatus == 'E')
-                        {
-                            dog.HdStatus = 'E';
-                            correctHdStatusInput = true;
-                        }
-                        else // if the input can be converted, but is other than a, A, b, B, c, C, d, D, e or E
+                        else // if the input can be converted, but is other than A, B, C, D or E
                         {
                             Console.WriteLine("The entered HD-status is not in the propor format.");
                             continue; // goes back to the start of the while loop
                         }
                     }
-                    else
+                    else // if the input can't be converted
                     {
                         Console.WriteLine("The entered HD-status is not in the propor format.");
                         // and the while loop will start over
@@ -182,22 +162,100 @@ namespace Hundehuset.UI
                             continue; // goes back to the start of the while loop
                         }
                     }
+                    else
+                    {
+                        Console.WriteLine("The entered Spondylosis status is not in the propor format.");
+                        // and the while loop will start over
+                    }
                 }
 
                 //HeartStatus
-                Console.Write("Please enter heart status: ");
-                dog.HeartStatus = int.Parse(Console.ReadLine());
+                bool correctHeartStatusInput = false;
+                int heartStatus;
+
+                while (correctHeartStatusInput == false)
+                {
+                    Console.Write("Please enter heart status: ");
+                    string inputHeartStatus = Console.ReadLine();
+
+                    if (string.IsNullOrEmpty(inputHeartStatus)) // there is no input
+                    {
+                        correctHeartStatusInput = true;
+                    }
+                    else if (int.TryParse(inputHeartStatus, out heartStatus)) // it is possible to parse the input to a char
+                    {
+                        if (heartStatus >= 1 || heartStatus <= 4)
+                        {
+                            dog.HeartStatus = heartStatus;
+                            correctHeartStatusInput = true;
+                        }
+                        else // if the input can be converted, but is other than 1, 2, 3 or 4
+                        {
+                            Console.WriteLine("The entered heart status is not in the propor format.");
+                            continue; // goes back to the start of the while loop
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("The entered heart status is not in the propor format.");
+                        // and the while loop will start over
+                    }
+                }
 
                 //Color
-                Console.Write("Please enter color (RG, TG, RG/HV, TG/HV, hvid, fejl): ");
-                dog.Color = Console.ReadLine();
+                bool correctColorInput = false;
 
-                //Console.Write("Is the dog alive? Press 1 for yes, 0 for no: ");
-                //dog.IsAlive = bool.Parse(Console.ReadLine());
+                while (correctColorInput == false)
+                {
+                    Console.Write("Please enter color (RG, TG, RG/HV, TG/HV, ufarve): ");
+                    string inputColorInput = Console.ReadLine().ToUpper();
+
+                    if (string.IsNullOrEmpty(inputColorInput)) // there is no input
+                    {
+                        correctColorInput = true;
+                    }
+                    else if (inputColorInput == "RG" || inputColorInput == "TG" || inputColorInput == "RG/HV" || inputColorInput == "TG/HV" || inputColorInput == "UFARVE")
+                    {
+                        dog.Color = inputColorInput;
+                        correctColorInput = true;
+                    }
+                    else // if the input is other than EMPTY, RG, TG, RG/HV, TG/HV or UFARVE
+                    {
+                        Console.WriteLine("The entered color is not in the propor format.");
+                        // and the while loop will start over
+                    }
+                }
+
+                //IsAlive
+                bool correctIsAliveInput = false;
+
+                while (correctIsAliveInput == false)
+                {
+                    Console.Write("Is the dog alive? (yes, no): ");
+                    string isAliveInput = Console.ReadLine().ToUpper();
+
+                    if (string.IsNullOrEmpty(isAliveInput)) // there is no input
+                    {
+                        correctIsAliveInput = true;
+                    }
+                    else if (isAliveInput == "YES")
+                    {
+                        dog.IsAlive = true;
+                    }
+                    else if (isAliveInput == "NO")
+                    {
+                        dog.IsAlive = false;
+                    }
+                    else // the input is other than EMPTY, yes or no
+                    {
+                        Console.WriteLine("The entered input is not in the propor format.");
+                        // and the while loop will start over
+                    }
+                }
 
                 //MomPedigreeNumber
                 Console.Write("Please enter pedigree number of the dog's mother: ");
-                dog.MomPedigreeNumber = Console.ReadLine();
+                dog.MomPedigreeNumber = Console.ReadLine().ToUpper();
 
                 //DadPedigreeNumber
                 Console.Write("Please enter pedigree number of the dog's father: ");
@@ -212,11 +270,10 @@ namespace Hundehuset.UI
                 dog.Breeder = Console.ReadLine();
 
                 dogController.CreateDog(dog);
-
             }
             else
             {
-                //ShowDog
+                //ShowDog metode fra controlleren 
             }
         }
 
