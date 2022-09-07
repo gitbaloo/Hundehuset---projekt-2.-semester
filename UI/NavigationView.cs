@@ -19,12 +19,21 @@ namespace Hundehuset.UI
 
             Console.WriteLine("Select menu");
             Console.WriteLine("1: Register new dog");
+            Console.WriteLine("2: Search for a dog");
             var choice = Console.ReadLine();
 
             switch (choice)
             {
                 case "1":
                     dogview.RegisterDog();
+                    break;
+
+                case "2":
+                    dogview.SearchDogView();
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid choice. Please try again");
                     break;
             }
         }

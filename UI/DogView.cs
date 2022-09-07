@@ -1,4 +1,5 @@
 ﻿using Hundehuset.Domain;
+using Hundehuset.TechnicalServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Hundehuset.UI
             Console.Write("Please enter pedigree number: ");
             var pedigreeNumber = Console.ReadLine();
 
-            if (!dogController.DoesPedigreeNumberExist(pedigreeNumber))
+            if (!dogController.IsDogInDatabase(pedigreeNumber))
             {
                 //Dog dog = dogController.CreateDog(pedigreeNumber);
 
@@ -222,6 +223,39 @@ namespace Hundehuset.UI
 
 
         // metode man kan fremsøge hund fra
+        public void SearchDogView()
+        {
 
+            bool searchDogExit = false;
+
+            while (!searchDogExit)
+            {
+                Console.Clear();
+                Console.WriteLine("FIND A DOG");
+                Console.WriteLine("Enter 'X' to exit");
+                Console.Write("Please enter pedigree number: ");
+                var pedigreeNumber = Console.ReadLine();
+                
+                
+                if (pedigreeNumber.ToUpper() == "X")
+                {
+                    searchDogExit = true;
+                }
+                else
+                {
+                    if (!dogController.IsDogInDatabase(pedigreeNumber))
+                    {
+                        Console.WriteLine("Dog not found. Press any button to return to search...");
+                        Console.ReadKey();
+                    }
+                    else
+                    {
+                        Dog existingDog = dogController.GetDog(pedigreeNumber);
+                        //ShowProfileDogView(existingDog)
+                    }
+
+                }
+            }
+        }
     }
 }

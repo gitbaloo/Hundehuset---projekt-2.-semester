@@ -11,7 +11,7 @@ namespace Hundehuset.Domain
     {
         DbAccess dbAccess = new();
 
-        public bool DoesPedigreeNumberExist(string pedigreeNumber)
+        public bool IsDogInDatabase(string pedigreeNumber)
         {
             Dog dog = dbAccess.GetDog(pedigreeNumber);
 
@@ -21,6 +21,10 @@ namespace Hundehuset.Domain
         public void CreateDog(Dog dog)
         {
             dbAccess.AddDog(dog);
+        }
+        public Dog GetDog(string pedigreeNumber)
+        {
+            return dbAccess.GetDog(pedigreeNumber);
         }
 
         /*
