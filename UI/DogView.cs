@@ -185,6 +185,7 @@ namespace Hundehuset.UI
                     else
                     {
                         Console.WriteLine("The entered Spondylosis status is not in the propor format.");
+                        // and the while loop will start over
                     }
                 }
 
@@ -217,6 +218,7 @@ namespace Hundehuset.UI
                     else
                     {
                         Console.WriteLine("The entered heart status is not in the propor format.");
+                        // and the while loop will start over
                     }
                 }
 
@@ -228,23 +230,52 @@ namespace Hundehuset.UI
                     Console.Write("Please enter color (RG, TG, RG/HV, TG/HV, ufarve): ");
                     string inputColorInput = Console.ReadLine();
 
-                    if (inputColorInput == "RG" || inputColorInput == "TG" || inputColorInput == "RG/HV" || inputColorInput == "TG/HV" || inputColorInput == "ufarve")
+                    if (string.IsNullOrEmpty(inputColorInput)) // there is no input
+                    {
+                        correctColorInput = true;
+                    }
+                    else if (inputColorInput == "RG" || inputColorInput == "TG" || inputColorInput == "RG/HV" || inputColorInput == "TG/HV" || inputColorInput == "UFARVE")
                     {
                         dog.Color = inputColorInput;
                         correctColorInput = true;
                     }
-                    else
+                    else // if the input can't be converted or can be converted but is other than RG, TG, RG/HV, TG/HV or ufarve
                     {
                         Console.WriteLine("The entered color is not in the propor format.");
+                        // and the while loop will start over
                     }
                 }
 
-                //Console.Write("Is the dog alive? Press 1 for yes, 0 for no: ");
-                //dog.IsAlive = bool.Parse(Console.ReadLine());
+                //IsAlive
+                bool correctIsAliveInput = false;
+
+                while (correctIsAliveInput == false)
+                {
+                    Console.Write("Is the dog alive? (yes, no): ");
+                    string isAliveInput = Console.ReadLine().ToUpper();
+
+                    if (string.IsNullOrEmpty(isAliveInput)) // there is no input
+                    {
+                        correctIsAliveInput = true;
+                    }
+                    else if (isAliveInput == "YES")
+                    {
+                        dog.IsAlive = true;
+                    }
+                    else if (isAliveInput == "NO")
+                    {
+                        dog.IsAlive = false;
+                    }
+                    else // the input is other than EMPTY, yes or no
+                    {
+                        Console.WriteLine("The entered input is not in the propor format.");
+                        // and the while loop will start over
+                    }
+                }
 
                 //MomPedigreeNumber
                 Console.Write("Please enter pedigree number of the dog's mother: ");
-                dog.MomPedigreeNumber = Console.ReadLine();
+                dog.MomPedigreeNumber = Console.ReadLine().ToUpper();
 
                 //DadPedigreeNumber
                 Console.Write("Please enter pedigree number of the dog's father: ");
@@ -259,11 +290,10 @@ namespace Hundehuset.UI
                 dog.Breeder = Console.ReadLine();
 
                 dogController.CreateDog(dog);
-
             }
             else
             {
-                //ShowDog
+                //ShowDog metode fra controlleren 
             }
         }
 
