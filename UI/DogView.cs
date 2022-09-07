@@ -108,7 +108,7 @@ namespace Hundehuset.UI
                 while (correctHdStatusInput == false)
                 {
                     Console.Write("Please enter HD-status (A, B, C, D or E): ");
-                    string inputHdStatus = Console.ReadLine();
+                    string inputHdStatus = Console.ReadLine().ToUpper();
 
                     if (string.IsNullOrEmpty(inputHdStatus)) // there is no input
                     {
@@ -116,38 +116,18 @@ namespace Hundehuset.UI
                     }
                     else if (char.TryParse(inputHdStatus, out hdStatus)) // it is possible to parse the input to a char
                     {
-                        if (hdStatus == 'a' || hdStatus == 'A')
+                        if (hdStatus == 'A' || hdStatus == 'B' || hdStatus == 'C' || hdStatus == 'D' || hdStatus == 'E')
                         {
-                            dog.HdStatus = 'A';
+                            dog.HdStatus = hdStatus;
                             correctHdStatusInput = true;
                         }
-                        else if (hdStatus == 'b' || hdStatus == 'B')
-                        {
-                            dog.HdStatus = 'B';
-                            correctHdStatusInput = true;
-                        }
-                        else if (hdStatus == 'c' || hdStatus == 'C')
-                        {
-                            dog.HdStatus = 'C';
-                            correctHdStatusInput = true;
-                        }
-                        else if (hdStatus == 'd' || hdStatus == 'D')
-                        {
-                            dog.HdStatus = 'D';
-                            correctHdStatusInput = true;
-                        }
-                        else if (hdStatus == 'e' || hdStatus == 'E')
-                        {
-                            dog.HdStatus = 'E';
-                            correctHdStatusInput = true;
-                        }
-                        else // if the input can be converted, but is other than a, A, b, B, c, C, d, D, e or E
+                        else // if the input can be converted, but is other than A, B, C, D or E
                         {
                             Console.WriteLine("The entered HD-status is not in the propor format.");
                             continue; // goes back to the start of the while loop
                         }
                     }
-                    else
+                    else // if the input can't be converted
                     {
                         Console.WriteLine("The entered HD-status is not in the propor format.");
                         // and the while loop will start over
@@ -228,7 +208,7 @@ namespace Hundehuset.UI
                 while (correctColorInput == false)
                 {
                     Console.Write("Please enter color (RG, TG, RG/HV, TG/HV, ufarve): ");
-                    string inputColorInput = Console.ReadLine();
+                    string inputColorInput = Console.ReadLine().ToUpper();
 
                     if (string.IsNullOrEmpty(inputColorInput)) // there is no input
                     {
@@ -239,7 +219,7 @@ namespace Hundehuset.UI
                         dog.Color = inputColorInput;
                         correctColorInput = true;
                     }
-                    else // if the input can't be converted or can be converted but is other than RG, TG, RG/HV, TG/HV or ufarve
+                    else // if the input is other than EMPTY, RG, TG, RG/HV, TG/HV or UFARVE
                     {
                         Console.WriteLine("The entered color is not in the propor format.");
                         // and the while loop will start over
