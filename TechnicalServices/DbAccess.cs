@@ -9,19 +9,29 @@ namespace Hundehuset.TechnicalServices
 {
     public class DbAccess
     {
-        List<Dog> dogs = new();
+        List<Dog> dogs;
 
-        public bool IsDogInDatabase(string pedigreeNumber)
+        public DbAccess()
         {
-            /*if (dogs.Any())
+            dogs = new List<Dog>();
+        }
+
+        /*public bool IsDogInDatabase(string pedigreeNumber)
+        {
+            if (dogs.Any())
             {
                 return dogs.Any(dog => dog.PedigreeNumber == pedigreeNumber);
             }
-            */
+            
             return false;
         }
+        */
+        public Dog GetDog(string pedigreeNumber)
+        {
+            return dogs.FirstOrDefault(x => x.PedigreeNumber == pedigreeNumber);
+        }
 
-        public void addDog(Dog dog)
+        public void AddDog(Dog dog)
         {
             dogs.Add(dog);
         }
