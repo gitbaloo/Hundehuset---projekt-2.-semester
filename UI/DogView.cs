@@ -58,8 +58,46 @@ namespace Hundehuset.UI
                 }
 
                 //Sex
-                Console.Write("Please enter sex (T for female and H for male): ");
-                dog.Sex = char.Parse(Console.ReadLine());
+                bool correctSexInput = false;
+                char sex;
+                
+                while (correctSexInput == false)
+                {
+                    Console.Write("Please enter sex (T for female and H for male): ");
+                    string input = Console.ReadLine();
+
+                    if (string.IsNullOrEmpty(input))
+                    {
+
+                    }
+                    else if (char.TryParse(input, out sex)) // is it posible to parse the input to a char
+                    {
+                        if (sex == 'h' || sex == 'H')
+                        {
+                            dog.Sex = 'H';
+                            correctSexInput = true;
+                        }
+                        else if (sex == 't' || sex == 'T')
+                        {
+                            dog.Sex = 'T';
+                            correctSexInput = true;
+                        }
+                        else // if the input can be converted, but is other than t, T, h or H
+                        {
+                            Console.WriteLine("The entered sex is not in the propor format.");
+                            continue; // go back to the start of the while loop
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("The entered sex is not in the propor format.");
+                        // and the while loop will start over
+                    }
+
+                }
+
+
+                //dog.Sex = char.Parse(Console.ReadLine());
 
                 //ChipNumber
                 Console.Write("Please enter chipnumber: ");
