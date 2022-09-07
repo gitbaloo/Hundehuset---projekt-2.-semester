@@ -182,15 +182,62 @@ namespace Hundehuset.UI
                             continue; // goes back to the start of the while loop
                         }
                     }
+                    else
+                    {
+                        Console.WriteLine("The entered Spondylosis status is not in the propor format.");
+                    }
                 }
 
                 //HeartStatus
-                Console.Write("Please enter heart status: ");
-                dog.HeartStatus = int.Parse(Console.ReadLine());
+                bool correctHeartStatusInput = false;
+                int heartStatus;
+
+                while (correctHeartStatusInput == false)
+                {
+                    Console.Write("Please enter heart status: ");
+                    string inputHeartStatus = Console.ReadLine();
+
+                    if (string.IsNullOrEmpty(inputHeartStatus)) // there is no input
+                    {
+                        correctHeartStatusInput = true;
+                    }
+                    else if (int.TryParse(inputHeartStatus, out heartStatus)) // it is possible to parse the input to a char
+                    {
+                        if (heartStatus >= 1 || heartStatus <= 4)
+                        {
+                            dog.HeartStatus = heartStatus;
+                            correctHeartStatusInput = true;
+                        }
+                        else // if the input can be converted, but is other than 1, 2, 3 or 4
+                        {
+                            Console.WriteLine("The entered heart status is not in the propor format.");
+                            continue; // goes back to the start of the while loop
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("The entered heart status is not in the propor format.");
+                    }
+                }
 
                 //Color
-                Console.Write("Please enter color (RG, TG, RG/HV, TG/HV, hvid, fejl): ");
-                dog.Color = Console.ReadLine();
+                bool correctColorInput = false;
+
+                while (correctColorInput == false)
+                {
+                    Console.Write("Please enter color (RG, TG, RG/HV, TG/HV, ufarve): ");
+                    string inputColorInput = Console.ReadLine();
+
+                    if (inputColorInput == "RG" || inputColorInput == "TG" || inputColorInput == "RG/HV" || inputColorInput == "TG/HV" || inputColorInput == "ufarve")
+                    {
+                        dog.Color = inputColorInput;
+                        correctColorInput = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("The entered color is not in the propor format.");
+                    }
+                }
 
                 //Console.Write("Is the dog alive? Press 1 for yes, 0 for no: ");
                 //dog.IsAlive = bool.Parse(Console.ReadLine());
