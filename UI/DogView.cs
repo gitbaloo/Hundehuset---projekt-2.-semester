@@ -38,14 +38,14 @@ namespace Hundehuset.UI
 
                 while (correctBirthDateInput == false) // loops until there is a propor input
                 {
-                    Console.Write("Please enter birthdate (dd-mm-yyyy): "); 
-                    string input = Console.ReadLine();
+                    Console.Write("Please enter birthdate (dd-mm-yyyy): ");
+                    string inputBirthDate = Console.ReadLine();
 
-                    if (string.IsNullOrEmpty(input))
+                    if (string.IsNullOrEmpty(inputBirthDate)) // there is no input
                     {
                         correctBirthDateInput = true; // stops the while loop
                     }
-                    else if (DateTime.TryParse(input, out birthDate))
+                    else if (DateTime.TryParse(inputBirthDate, out birthDate))
                     {
                         dog.BirthDate = birthDate;
                         correctBirthDateInput = true; // stops the while loop
@@ -60,17 +60,17 @@ namespace Hundehuset.UI
                 //Sex
                 bool correctSexInput = false;
                 char sex;
-                
+
                 while (correctSexInput == false)
                 {
                     Console.Write("Please enter sex (T for female and H for male): ");
-                    string input = Console.ReadLine();
+                    string inputSex = Console.ReadLine();
 
-                    if (string.IsNullOrEmpty(input))
+                    if (string.IsNullOrEmpty(inputSex)) // there is no input
                     {
                         correctSexInput = true;
                     }
-                    else if (char.TryParse(input, out sex)) // is it posible to parse the input to a char
+                    else if (char.TryParse(inputSex, out sex)) // is it posible to parse the input to a char
                     {
                         if (sex == 'h' || sex == 'H')
                         {
@@ -108,13 +108,13 @@ namespace Hundehuset.UI
                 while (correctHdStatusInput == false)
                 {
                     Console.Write("Please enter HD-status (A, B, C, D or E): ");
-                    string input = Console.ReadLine();
+                    string inputHdStatus = Console.ReadLine();
 
-                    if (string.IsNullOrEmpty(input))
+                    if (string.IsNullOrEmpty(inputHdStatus)) // there is no input
                     {
                         correctHdStatusInput = true;
                     }
-                    else if (char.TryParse(input, out hdStatus)) // is it posible to parse the input to a char
+                    else if (char.TryParse(inputHdStatus, out hdStatus)) // it is possible to parse the input to a char
                     {
                         if (hdStatus == 'a' || hdStatus == 'A')
                         {
@@ -157,8 +157,32 @@ namespace Hundehuset.UI
                 //missing HD-index
 
                 //SpondylosisStatus
-                Console.Write("Please enter Spondylosis status: ");
-                dog.SpondylosisStatus = int.Parse(Console.ReadLine());
+                bool correctSpondylosisStatusInput = false;
+                int spondylosisStatus;
+
+                while (correctSpondylosisStatusInput == false)
+                {
+                    Console.Write("Please enter Spondylosis status: ");
+                    string inputSpondylosisStatus = Console.ReadLine();
+
+                    if (string.IsNullOrEmpty(inputSpondylosisStatus)) // there is no input
+                    {
+                        correctSpondylosisStatusInput = true;
+                    }
+                    else if (int.TryParse(inputSpondylosisStatus, out spondylosisStatus)) // it is possible to parse the input to a char
+                    {
+                        if (spondylosisStatus >= 1 || spondylosisStatus <= 4)
+                        {
+                            dog.SpondylosisStatus = spondylosisStatus;
+                            correctSpondylosisStatusInput = true;
+                        }
+                        else // if the input can be converted, but is other than 1, 2, 3 or 4
+                        {
+                            Console.WriteLine("The entered Spondylosis status is not in the propor format.");
+                            continue; // goes back to the start of the while loop
+                        }
+                    }
+                }
 
                 //HeartStatus
                 Console.Write("Please enter heart status: ");
