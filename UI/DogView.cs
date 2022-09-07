@@ -68,7 +68,7 @@ namespace Hundehuset.UI
 
                     if (string.IsNullOrEmpty(input))
                     {
-
+                        correctSexInput = true;
                     }
                     else if (char.TryParse(input, out sex)) // is it posible to parse the input to a char
                     {
@@ -93,7 +93,6 @@ namespace Hundehuset.UI
                         Console.WriteLine("The entered sex is not in the propor format.");
                         // and the while loop will start over
                     }
-
                 }
 
 
