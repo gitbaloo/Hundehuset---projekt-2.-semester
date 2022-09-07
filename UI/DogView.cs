@@ -85,7 +85,7 @@ namespace Hundehuset.UI
                         else // if the input can be converted, but is other than t, T, h or H
                         {
                             Console.WriteLine("The entered sex is not in the propor format.");
-                            continue; // go back to the start of the while loop
+                            continue; // goes back to the start of the while loop
                         }
                     }
                     else
@@ -95,18 +95,64 @@ namespace Hundehuset.UI
                     }
                 }
 
-
-                //dog.Sex = char.Parse(Console.ReadLine());
-
                 //ChipNumber
                 Console.Write("Please enter chipnumber: ");
-                dog.ChipNumber = int.Parse(Console.ReadLine());
+                dog.ChipNumber = Console.ReadLine();
 
                 //missing InbreedingCoefficient
 
                 //HdStatus
-                Console.Write("Please enter HD-status: ");
-                dog.HdStatus = char.Parse(Console.ReadLine());
+                bool correctHdStatusInput = false;
+                char hdStatus;
+
+                while (correctHdStatusInput == false)
+                {
+                    Console.Write("Please enter HD-status (A, B, C, D or E): ");
+                    string input = Console.ReadLine();
+
+                    if (string.IsNullOrEmpty(input))
+                    {
+                        correctHdStatusInput = true;
+                    }
+                    else if (char.TryParse(input, out hdStatus)) // is it posible to parse the input to a char
+                    {
+                        if (hdStatus == 'a' || hdStatus == 'A')
+                        {
+                            dog.HdStatus = 'A';
+                            correctHdStatusInput = true;
+                        }
+                        else if (hdStatus == 'b' || hdStatus == 'B')
+                        {
+                            dog.HdStatus = 'B';
+                            correctHdStatusInput = true;
+                        }
+                        else if (hdStatus == 'c' || hdStatus == 'C')
+                        {
+                            dog.HdStatus = 'C';
+                            correctHdStatusInput = true;
+                        }
+                        else if (hdStatus == 'd' || hdStatus == 'D')
+                        {
+                            dog.HdStatus = 'D';
+                            correctHdStatusInput = true;
+                        }
+                        else if (hdStatus == 'e' || hdStatus == 'E')
+                        {
+                            dog.HdStatus = 'E';
+                            correctHdStatusInput = true;
+                        }
+                        else // if the input can be converted, but is other than a, A, b, B, c, C, d, D, e or E
+                        {
+                            Console.WriteLine("The entered HD-status is not in the propor format.");
+                            continue; // goes back to the start of the while loop
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("The entered HD-status is not in the propor format.");
+                        // and the while loop will start over
+                    }
+                }
 
                 //missing HD-index
 
