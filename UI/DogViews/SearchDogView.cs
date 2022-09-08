@@ -62,7 +62,6 @@ namespace Hundehuset.UI.DogViews
                         Console.WriteLine("Press any button to return to search..."); //Returning to search where user can choose to return to main menu or search for another dog
                         Console.ReadKey();
                     }
-
                 }
             }
         }
