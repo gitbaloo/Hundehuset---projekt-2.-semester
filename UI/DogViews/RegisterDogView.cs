@@ -268,6 +268,13 @@ namespace Hundehuset.UI.DogViews
                 dog.Breeder = Console.ReadLine();
 
                 dogController.CreateDog(dog);
+
+                // show resume of dog 
+                Console.Clear();
+                Console.WriteLine("RESUME OF REGISTERED DOG");
+                Console.WriteLine();
+                showProfileDogView.ShowView(dog);
+                Console.ReadKey();
             }
             else
             {
