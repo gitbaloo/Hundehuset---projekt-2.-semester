@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hundehuset.UI.DogViews;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,8 @@ namespace Hundehuset.UI
             switch (choice)
             {
                 case "1":
-                    dogview.RegisterDog();
+                    RegisterDogView registerDogView = new RegisterDogView();
+                    registerDogView.ShowView();
                     break;
 
                 case "2":

@@ -18,6 +18,7 @@ namespace Hundehuset.TechnicalServices
             try
             {
                 StreamReader sr = new StreamReader(path);
+                Dogs = new List<Dog>();
 
                 var lines = new List<string>();
                 string line;
@@ -41,8 +42,8 @@ namespace Hundehuset.TechnicalServices
                         InbreedingCoefficient = double.Parse(data[6]),
                         HdStatus = char.Parse(data[7]),
                         HdIndex = int.Parse(data[8]),
-                        SpondylosisStatus = char.Parse(data[9]),
-                        HeartStatus = char.Parse(data[10]),
+                        SpondylosisStatus = int.Parse(data[9]),
+                        HeartStatus = int.Parse(data[10]),
                         Color = data[11],
                         IsAlive = bool.Parse(data[12]),
                         MomPedigreeNumber = data[13],
