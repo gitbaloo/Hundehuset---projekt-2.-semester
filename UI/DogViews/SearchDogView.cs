@@ -27,10 +27,10 @@ namespace Hundehuset.UI.DogViews
                 Console.WriteLine("Enter 'X' to return to main menu");
                 Console.Write("Please enter pedigree number: ");
 
-                var pedigreeNumber = Console.ReadLine().ToUpper();
+                var pedigreeNumber = Console.ReadLine();
                 
                 //exit condition
-                if (pedigreeNumber == "X")
+                if (pedigreeNumber.ToUpper() == "X")
                 {
                     searchDogExit = true;
                 }
