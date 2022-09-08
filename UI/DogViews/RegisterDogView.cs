@@ -16,6 +16,7 @@ namespace Hundehuset.UI.DogViews
         {
             Console.Clear();
             Console.WriteLine("REGISTER NEW DOG");
+            Console.WriteLine("Enter 'X' to return to main menu.");
             Console.Write("Please enter pedigree number: ");
             var pedigreeNumber = Console.ReadLine();
 
@@ -230,6 +231,7 @@ namespace Hundehuset.UI.DogViews
 
                     if (string.IsNullOrEmpty(isAliveInput)) // there is no input
                     {
+                        dog.IsAlive = true; // If nothing is selected, the dog will default be alive 
                         correctIsAliveInput = true;
                     }
                     else if (isAliveInput == "YES")
@@ -269,8 +271,11 @@ namespace Hundehuset.UI.DogViews
             }
             else
             {
+                Console.WriteLine("Dog already exist.");
+                Console.WriteLine();
                 Dog existingDog = dogController.GetDog(pedigreeNumber);
                 showProfileDogView.ShowView(existingDog);
+                Console.ReadKey();
             }
         }
     }
