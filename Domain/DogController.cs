@@ -22,12 +22,12 @@ namespace Hundehuset.Domain
         {
             dbAccess.AddDog(dog);
         }
+
         public Dog GetDog(string pedigreeNumber)
         {
             return dbAccess.GetDog(pedigreeNumber);
         }
     }
-
 }
 
 
