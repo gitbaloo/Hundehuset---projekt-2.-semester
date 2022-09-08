@@ -12,7 +12,7 @@ namespace Hundehuset.Domain
         public string PedigreeNumber { get; set; }
         public string Name { get; set; }
         public DateTime? BirthDate { get; set; }
-        public char Sex { get; set; }
+        public char? Sex { get; set; }
         public string ChipNumber { get; set; }
         public double? InbreedingCoefficient { get; set; }
         public char? HdStatus { get; set; }

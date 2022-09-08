@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hundehuset.TechnicalServices
 {
-    //DbAccess created as a singletong
+    //DbAccess created as a singleton
 
     public sealed class DbAccess
     {
@@ -50,14 +50,14 @@ namespace Hundehuset.TechnicalServices
                         Id = int.Parse(data[0]),
                         PedigreeNumber = data[1],
                         Name = data[2],
-                        BirthDate = DateTime.Parse(data[3]),
-                        Sex = char.Parse(data[4]),
+                        BirthDate = data[3] == null ? null : DateTime.Parse(data[3]), //Denne property er nullable, så der parses til null eller DateTime
+                        Sex = data[4] == null ? null : char.Parse(data[4]), //Denne property er nullable
                         ChipNumber = data[5],
-                        InbreedingCoefficient = double.Parse(data[6]),
-                        HdStatus = char.Parse(data[7]),
-                        HdIndex = int.Parse(data[8]),
-                        SpondylosisStatus = int.Parse(data[9]),
-                        HeartStatus = int.Parse(data[10]),
+                        InbreedingCoefficient = double.TryParse(data[6], out double ic) == false ? null : ic, //Denne property er nullable
+                        HdStatus = data[7] == null ? null : char.Parse(data[7]), //Denne property er nullable
+                        HdIndex = int.TryParse(data[8], out int hi) == false ? null : hi, //Denne property er nullable
+                        SpondylosisStatus = int.TryParse(data[9], out int ss) == false ? null: ss, //Denne property er nullable
+                        HeartStatus = int.TryParse(data[10], out int hs) == false ? null : hs, //Denne property er nullable
                         Color = data[11],
                         IsAlive = bool.Parse(data[12]),
                         MomPedigreeNumber = data[13],
@@ -66,6 +66,8 @@ namespace Hundehuset.TechnicalServices
                         Breeder = data[16]
                     });
                 }
+
+
             }
             //Hvis databasen ikke eksisterer oprettes en ny tom liste.
             catch (Exception)
