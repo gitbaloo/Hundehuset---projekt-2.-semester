@@ -18,10 +18,19 @@ namespace Hundehuset.Domain
             return dog == null ? false : true;
         }
 
-        public void CreateDog(Dog dog)
+        public bool CreateDog(Dog dog)
         {
-            dbAccess.AddDog(dog);
+            if (!IsDogInDatabase(dog.PedigreeNumber))
+            {
+                dbAccess.AddDog(dog);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
+
         public Dog GetDog(string pedigreeNumber)
         {
             return dbAccess.GetDog(pedigreeNumber);

@@ -277,27 +277,40 @@ namespace Hundehuset.UI.DogViews
                     dog.Breeder = Console.ReadLine();
 
                     // add dog with the above info to the database
-                    dogController.CreateDog(dog);
+                    bool dogCreated = dogController.CreateDog(dog);
 
-                    // show resume of dog 
-                    Console.Clear();
-                    Console.WriteLine("RESUME OF REGISTERED DOG");
-                    Console.WriteLine();
-                    showProfileDogView.ShowView(dog);
-                    Console.WriteLine();
-                    Console.WriteLine("Press any key to return to register dog.");
-                    Console.ReadKey();
+                    if (dogCreated)
+                    {
+                        // show resume of dog 
+                        Console.Clear();
+                        Console.WriteLine("RESUME OF REGISTERED DOG");
+                        Console.WriteLine();
+                        showProfileDogView.ShowView(dog);
+                        Console.WriteLine();
+                        Console.WriteLine("Press any key to return to register dog.");
+                        Console.ReadKey();
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        DogExist(pedigreeNumber);
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("Dog already exist.");
-                    Console.WriteLine();
-                    Dog existingDog = dogController.GetDog(pedigreeNumber);
-                    showProfileDogView.ShowView(existingDog);
-                    Console.WriteLine();
-                    Console.WriteLine("Press any key to return to register dog.");
-                    Console.ReadKey();
+                    DogExist(pedigreeNumber);
                 }
+            }
+
+            void DogExist(string pedigreeNumber)
+            {
+                Console.WriteLine("Dog already exist.");
+                Console.WriteLine();
+                Dog existingDog = dogController.GetDog(pedigreeNumber);
+                showProfileDogView.ShowView(existingDog);
+                Console.WriteLine();
+                Console.WriteLine("Press any key to return to register dog.");
+                Console.ReadKey();
             }
         }
     }

@@ -15,6 +15,7 @@ namespace Hundehuset.TechnicalServices
 
         public DbAccess()
         {
+            //Ved instansiering af DbAccess forsøges det at hente en eksisterende database
             try
             {
                 StreamReader sr = new StreamReader(path);
@@ -53,6 +54,7 @@ namespace Hundehuset.TechnicalServices
                     });
                 }
             }
+            //Hvis databasen ikke eksisterer oprettes en ny tom liste.
             catch (Exception)
             {
                 Dogs = new List<Dog>();
@@ -71,6 +73,7 @@ namespace Hundehuset.TechnicalServices
             UpdateDatabase();
         }
 
+        //Tekstfilen overskrives med den information, der ligger i listen Dogs
         public void UpdateDatabase()
         {
             StreamWriter sw = new StreamWriter(path);

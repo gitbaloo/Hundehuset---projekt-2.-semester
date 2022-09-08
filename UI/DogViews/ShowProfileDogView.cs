@@ -11,7 +11,6 @@ namespace Hundehuset.UI.DogViews
     {
         public void ShowView(Dog dog)
         {
-            Console.Clear();
             Console.WriteLine("Showing profile for {0} ({1})", dog.Name, dog.PedigreeNumber);
             Console.WriteLine();
             Console.WriteLine("Pedigree Number: {0}", dog.PedigreeNumber);
