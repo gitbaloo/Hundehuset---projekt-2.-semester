@@ -26,7 +26,7 @@ namespace Hundehuset.UI
             //Only when the system starts up
             Console.WriteLine("Who let the dogs out?");
             Console.ReadKey();
-            Console.WriteLine("Woof, woof, woof!");
+            Console.WriteLine("Woof, woof, woof!!");
             Console.ReadKey();
 
             // Loop of menu, that loops until the close program is selected
