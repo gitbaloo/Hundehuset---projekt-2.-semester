@@ -39,10 +39,10 @@ namespace Hundehuset.UI
                 switch (choice)
                 {
                     case "1":
-                        dogview.RegisterDog();
+                        registerDogView.ShowView();
                         break;
                     case "2":
-                        dogview.SearchDogView();
+                        searchDogView.ShowView();
                         break;
                     case "X":
                         runProgram = false;
