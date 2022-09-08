@@ -13,7 +13,7 @@ namespace Hundehuset.Domain
 
         public DogController()
         {
-            dbAccess = new DbAccess();
+            dbAccess = DbAccess.Instance;
         }
 
         public bool IsDogInDatabase(string pedigreeNumber)

@@ -7,13 +7,26 @@ using System.Threading.Tasks;
 
 namespace Hundehuset.TechnicalServices
 {
-    public class DbAccess
+    //DbAccess created as a singletong
+
+    public sealed class DbAccess
     {
         public List<Dog> Dogs { get; set; }
 
         private string path = "Dog.txt";
 
-        public DbAccess()
+        private static readonly DbAccess _instance = new DbAccess();
+
+        public static DbAccess Instance
+        {
+            get { return _instance; }
+        }
+
+        static DbAccess()
+        {
+        }
+
+        private DbAccess()
         {
             //Ved instansiering af DbAccess forsøges det at hente en eksisterende database
             try

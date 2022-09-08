@@ -289,24 +289,24 @@ namespace Hundehuset.UI.DogViews
                     dog.Breeder = Console.ReadLine();
 
                     // add dog with the above info to the database
-                    /*bool dogCreated = */dogController.CreateDog(dog);
+                    bool dogCreated = dogController.CreateDog(dog);
 
-                    //if (dogCreated)
-                    //{
-                        // show resume of dog 
+                    if (dogCreated)
+                    {
+                      // show resume of dog 
+                      Console.Clear();
+                      Console.WriteLine("RESUME OF REGISTERED DOG");
+                      Console.WriteLine();
+                      showProfileDogView.ShowView(dog);
+                      Console.WriteLine();
+                      Console.WriteLine("Press any key to return to register dog.");
+                      Console.ReadKey();
+                    }
+                    else
+                    {
                         Console.Clear();
-                        Console.WriteLine("RESUME OF REGISTERED DOG");
-                        Console.WriteLine();
-                        showProfileDogView.ShowView(dog);
-                        Console.WriteLine();
-                        Console.WriteLine("Press any key to return to register dog.");
-                        Console.ReadKey();
-                    //}
-                    //else
-                    //{
-                    //    Console.Clear();
-                    //    DogExist(pedigreeNumber);
-                    //}
+                        DogExist(pedigreeNumber);
+                    }
                 }
                 else // a dog with the selected pedigreeNumber was found in our database
                 {
