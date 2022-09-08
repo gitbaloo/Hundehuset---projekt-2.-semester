@@ -24,7 +24,7 @@ namespace Hundehuset.UI.DogViews
                 Console.Write("Please enter pedigree number: ");
                 var pedigreeNumber = Console.ReadLine();
 
-                if (pedigreeNumber.ToUpper() == "x") // x, will break the loop and return to NavigationView
+                if (pedigreeNumber.ToUpper() == "X") // x, will break the loop and return to NavigationView
                 {
                     registerDogExit = true;
                 }
