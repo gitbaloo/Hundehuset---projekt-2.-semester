@@ -36,7 +36,6 @@ namespace Hundehuset.Domain
             return dbAccess.GetDog(pedigreeNumber);
         }
     }
-
 }
 
 
