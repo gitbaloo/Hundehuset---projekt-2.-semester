@@ -10,6 +10,8 @@ namespace Hundehuset.UI.DogViews
     public class SearchDogView
     {
         DogController dogController = new();
+        ShowProfileDogView showDogView = new();
+
         // metode man kan fremsøge hund fra
         public void ShowView()
         {
@@ -40,7 +42,6 @@ namespace Hundehuset.UI.DogViews
                     {
                         Dog existingDog = dogController.GetDog(pedigreeNumber);
 
-                        ShowProfileDogView showDogView = new();
                         showDogView.ShowView(existingDog);
                         Console.ReadKey();
                     }

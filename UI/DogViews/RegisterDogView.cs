@@ -10,6 +10,7 @@ namespace Hundehuset.UI.DogViews
     public class RegisterDogView
     {
         DogController dogController = new();
+        ShowProfileDogView showProfileDogView = new();
 
         public void ShowView()
         {
@@ -269,7 +270,7 @@ namespace Hundehuset.UI.DogViews
             else
             {
                 Dog existingDog = dogController.GetDog(pedigreeNumber);
-                ShowProfileDogView(existingDog);
+                showProfileDogView.ShowView(existingDog);
             }
         }
     }

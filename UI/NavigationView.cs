@@ -9,7 +9,8 @@ namespace Hundehuset.UI
 {
     public class NavigationView
     {
-        DogView dogview = new();
+        RegisterDogView registerDogView = new();
+        SearchDogView searchDogView = new();
 
         public void menu()
         {
@@ -26,12 +27,11 @@ namespace Hundehuset.UI
             switch (choice)
             {
                 case "1":
-                    RegisterDogView registerDogView = new RegisterDogView();
                     registerDogView.ShowView();
                     break;
 
                 case "2":
-                    dogview.SearchDogView();
+                    searchDogView.ShowView();
                     break;
 
                 default:
