@@ -9,7 +9,12 @@ namespace Hundehuset.Domain
 {
     public class DogController
     {
-        DbAccess dbAccess = new();
+        private DbAccess dbAccess;
+
+        public DogController()
+        {
+            dbAccess = new DbAccess();
+        }
 
         public bool IsDogInDatabase(string pedigreeNumber)
         {

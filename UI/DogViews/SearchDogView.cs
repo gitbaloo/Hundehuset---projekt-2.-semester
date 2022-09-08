@@ -10,8 +10,14 @@ namespace Hundehuset.UI.DogViews
     public class SearchDogView
     {
         //Instantiating the other classes, whose methods we will be using
-        DogController dogController = new();
-        ShowProfileDogView showDogView = new();
+        DogController dogController;
+        ShowProfileDogView showDogView;
+
+        public SearchDogView(DogController dogController)
+        {
+            this.dogController = dogController;
+            showDogView = new();
+        }
 
         //method for finding a dog / searching for a dog using pedigree number
         public void ShowView()
@@ -50,6 +56,7 @@ namespace Hundehuset.UI.DogViews
                     else
                     {
                         Dog existingDog = dogController.GetDog(pedigreeNumber); //We instantiate a dog 'existingDog' that has the attributes of the dog that the dogController got for us
+                        Console.Clear();
                         showDogView.ShowView(existingDog); //We call the method for showing the attributes of existingDog - the dog's profile.
                         Console.WriteLine();
                         Console.WriteLine("Press any button to return to search..."); //Returning to search where user can choose to return to main menu or search for another dog

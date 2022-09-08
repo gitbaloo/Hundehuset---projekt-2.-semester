@@ -11,7 +11,7 @@ namespace Hundehuset.TechnicalServices
     {
         public List<Dog> Dogs { get; set; }
 
-        string path = "Dog.txt";
+        private string path = "Dog.txt";
 
         public DbAccess()
         {

@@ -1,4 +1,5 @@
-﻿using Hundehuset.UI.DogViews;
+﻿using Hundehuset.Domain;
+using Hundehuset.UI.DogViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,16 @@ namespace Hundehuset.UI
 {
     public class NavigationView
     {
-        RegisterDogView registerDogView = new();
-        SearchDogView searchDogView = new();
+        private DogController dogController;
+        private RegisterDogView registerDogView;
+        private SearchDogView searchDogView;
+
+        public NavigationView()
+        {
+            dogController = new DogController();
+            registerDogView = new RegisterDogView(dogController);
+            searchDogView = new SearchDogView(dogController);
+        }
 
         public void menu()
         {

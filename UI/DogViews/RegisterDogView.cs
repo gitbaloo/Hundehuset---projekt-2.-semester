@@ -9,8 +9,14 @@ namespace Hundehuset.UI.DogViews
 {
     public class RegisterDogView
     {
-        DogController dogController = new();
-        ShowProfileDogView showProfileDogView = new();
+        private DogController dogController;
+        private ShowProfileDogView showProfileDogView;
+
+        public RegisterDogView(DogController dogController)
+        {
+            this.dogController = dogController;
+            showProfileDogView = new();
+        }
 
         public void ShowView()
         {
@@ -283,10 +289,10 @@ namespace Hundehuset.UI.DogViews
                     dog.Breeder = Console.ReadLine();
 
                     // add dog with the above info to the database
-                    bool dogCreated = dogController.CreateDog(dog);
+                    /*bool dogCreated = */dogController.CreateDog(dog);
 
-                    if (dogCreated)
-                    {
+                    //if (dogCreated)
+                    //{
                         // show resume of dog 
                         Console.Clear();
                         Console.WriteLine("RESUME OF REGISTERED DOG");
@@ -295,12 +301,12 @@ namespace Hundehuset.UI.DogViews
                         Console.WriteLine();
                         Console.WriteLine("Press any key to return to register dog.");
                         Console.ReadKey();
-                    }
-                    else
-                    {
-                        Console.Clear();
-                        DogExist(pedigreeNumber);
-                    }
+                    //}
+                    //else
+                    //{
+                    //    Console.Clear();
+                    //    DogExist(pedigreeNumber);
+                    //}
                 }
                 else // a dog with the selected pedigreeNumber was found in our database
                 {
