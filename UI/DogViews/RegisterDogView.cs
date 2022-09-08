@@ -28,7 +28,13 @@ namespace Hundehuset.UI.DogViews
                 {
                     registerDogExit = true;
                 }
-                else if (!dogController.IsDogInDatabase(pedigreeNumber))
+                else if (string.IsNullOrEmpty(pedigreeNumber)) // if there is no input to pedigreeNumber 
+                {
+                    Console.WriteLine("You must enter 'X' or a pedigree number.");
+                    Console.WriteLine("Press any key to continue.");
+                    Console.ReadKey();
+                }
+                else if (!dogController.IsDogInDatabase(pedigreeNumber)) // no dog with the selected pedigreeNumber was found in our database
                 {
                     //Create a new Dog, with the selected PedigreeNumber
                     Dog dog = new()
@@ -288,7 +294,7 @@ namespace Hundehuset.UI.DogViews
                     Console.WriteLine("Press any key to return to register dog.");
                     Console.ReadKey();
                 }
-                else
+                else // a dog with the selected pedigreeNumber was found in our database
                 {
                     Console.WriteLine("Dog already exist.");
                     Console.WriteLine();
