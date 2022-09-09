@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Hundehuset.UI.DogViews
@@ -34,9 +35,9 @@ namespace Hundehuset.UI.DogViews
                 {
                     registerDogExit = true;
                 }
-                else if (string.IsNullOrEmpty(pedigreeNumber)) // if there is no input to pedigreeNumber 
+                else if (!Regex.IsMatch(pedigreeNumber, @"^[a-zA-Z0-9]+$")) // if there is no input to pedigreeNumber or in wrong format
                 {
-                    Console.WriteLine("You must enter 'X' or a pedigree number.");
+                    Console.WriteLine("You must enter 'X' or a valid pedigree number (only letters and digits - no spaces or special characters)");
                     Console.WriteLine("Press any key to continue.");
                     Console.ReadKey();
                 }
@@ -51,7 +52,13 @@ namespace Hundehuset.UI.DogViews
                     Console.WriteLine("ADDITIONAL INFO");
                     //Name
                     Console.Write("Please enter name of the dog: ");
-                    dog.Name = Console.ReadLine();
+                    string inputName = Console.ReadLine();
+
+                    if (!string.IsNullOrEmpty(inputName)) //Dog will only be assigned a name if there is input
+                    {
+                        inputName = dog.Name;
+                    }
+
 
                     //BirthDate
                     DateTime birthDate;
@@ -73,7 +80,7 @@ namespace Hundehuset.UI.DogViews
                         }
                         else
                         {
-                            Console.WriteLine("The entered birthdate is not in the propor format.");
+                            Console.WriteLine("The entered birthdate is not in the proper format.");
                             // and the while loop starts over 
                         }
                     }
@@ -100,21 +107,41 @@ namespace Hundehuset.UI.DogViews
                             }
                             else // if the input can be converted, but is other than T or H
                             {
-                                Console.WriteLine("The entered sex is not in the propor format.");
+                                Console.WriteLine("The entered sex is not in the proper format.");
                                 continue; // goes back to the start of the while loop
                             }
                         }
                         else
                         {
-                            Console.WriteLine("The entered sex is not in the propor format.");
+                            Console.WriteLine("The entered sex is not in the proper format.");
                             // and the while loop will start over
                         }
                     }
 
                     //ChipNumber
-                    Console.Write("Please enter chipnumber: ");
-                    dog.ChipNumber = Console.ReadLine();
+                    bool correctChipInput = false;
+                    string inputChipNumber;
 
+                    while (correctChipInput == false)
+                    {
+                        Console.Write("Please enter chipnumber: ");
+                        inputChipNumber = Console.ReadLine();
+
+                        if (string.IsNullOrEmpty(inputChipNumber)) //Will accept no input and continue to next property insertion
+                        {
+                            correctChipInput = true;
+                        }
+                        else if (Regex.IsMatch(inputChipNumber, @"^[a-zA-Z0-9-]+$")) //Checks whether the user input is entered properly. Accepts letters, digits and dash (-).
+                            //Note that in the CSV-file some chipnumbers are written with spaces or "Chip:" is spelled out in it - we want to make the program to alter these when it loads them in.
+                        {
+                            dog.ChipNumber = inputChipNumber;
+                            correctChipInput = true;
+                        }
+                        else //if input not entered properly
+                        {
+                            Console.WriteLine("The entered chipnumber is not in the proper format.");
+                        }
+                    }
                     //missing InbreedingCoefficient
 
                     //HdStatus
@@ -139,13 +166,13 @@ namespace Hundehuset.UI.DogViews
                             }
                             else // if the input can be converted, but is other than A, B, C, D or E
                             {
-                                Console.WriteLine("The entered HD-status is not in the propor format.");
+                                Console.WriteLine("The entered HD-status is not in the proper format.");
                                 continue; // goes back to the start of the while loop
                             }
                         }
                         else // if the input can't be converted
                         {
-                            Console.WriteLine("The entered HD-status is not in the propor format.");
+                            Console.WriteLine("The entered HD-status is not in the proper format.");
                             // and the while loop will start over
                         }
                     }
@@ -174,13 +201,13 @@ namespace Hundehuset.UI.DogViews
                             }
                             else // if the input can be converted, but is other than 1, 2, 3 or 4
                             {
-                                Console.WriteLine("The entered Spondylosis status is not in the propor format.");
+                                Console.WriteLine("The entered Spondylosis status is not in the proper format.");
                                 continue; // goes back to the start of the while loop
                             }
                         }
                         else
                         {
-                            Console.WriteLine("The entered Spondylosis status is not in the propor format.");
+                            Console.WriteLine("The entered Spondylosis status is not in the proper format.");
                             // and the while loop will start over
                         }
                     }
@@ -207,13 +234,13 @@ namespace Hundehuset.UI.DogViews
                             }
                             else // if the input can be converted, but is other than 1, 2, 3 or 4
                             {
-                                Console.WriteLine("The entered heart status is not in the propor format.");
+                                Console.WriteLine("The entered heart status is not in the proper format.");
                                 continue; // goes back to the start of the while loop
                             }
                         }
                         else
                         {
-                            Console.WriteLine("The entered heart status is not in the propor format.");
+                            Console.WriteLine("The entered heart status is not in the proper format.");
                             // and the while loop will start over
                         }
                     }
@@ -224,20 +251,20 @@ namespace Hundehuset.UI.DogViews
                     while (correctColorInput == false)
                     {
                         Console.Write("Please enter color (RG, TG, RG/HV, TG/HV, ufarve): ");
-                        string inputColorInput = Console.ReadLine().ToUpper();
+                        string inputColor = Console.ReadLine().ToUpper();
 
-                        if (string.IsNullOrEmpty(inputColorInput)) // there is no input
+                        if (string.IsNullOrEmpty(inputColor)) // there is no input
                         {
                             correctColorInput = true;
                         }
-                        else if (inputColorInput == "RG" || inputColorInput == "TG" || inputColorInput == "RG/HV" || inputColorInput == "TG/HV" || inputColorInput == "UFARVE")
+                        else if (inputColor == "RG" || inputColor == "TG" || inputColor == "RG/HV" || inputColor == "TG/HV" || inputColor == "UFARVE")
                         {
-                            dog.Color = inputColorInput;
+                            dog.Color = inputColor;
                             correctColorInput = true;
                         }
                         else // if the input is other than EMPTY, RG, TG, RG/HV, TG/HV or UFARVE
                         {
-                            Console.WriteLine("The entered color is not in the propor format.");
+                            Console.WriteLine("The entered color is not in the proper format.");
                             // and the while loop will start over
                         }
                     }
@@ -267,18 +294,55 @@ namespace Hundehuset.UI.DogViews
                         }
                         else // the input is other than EMPTY, YES or NO
                         {
-                            Console.WriteLine("The entered input is not in the propor format.");
+                            Console.WriteLine("The entered input is not in the proper format.");
                             // and the while loop will start over
                         }
                     }
 
                     //MomPedigreeNumber
-                    Console.Write("Please enter pedigree number of the dog's mother: ");
-                    dog.MomPedigreeNumber = Console.ReadLine();
+                    bool correctMomPedigreeNumberInput = false;
 
+                    while (correctMomPedigreeNumberInput == false)
+                    {
+                        Console.Write("Please enter pedigree number of the dog's mother: ");
+                        string inputMomPedigreeNumber = Console.ReadLine();
+
+                        if (Regex.IsMatch(inputMomPedigreeNumber, @"^[a-zA-Z0-9]+$")) // if there is no input to pedigreeNumber or in wrong format
+                        {
+                            dog.MomPedigreeNumber = inputMomPedigreeNumber;
+                            correctMomPedigreeNumberInput = true;
+                        }
+                        else if (string.IsNullOrEmpty(inputMomPedigreeNumber)) //Will accept no input and continue to next property insertion
+                        {
+                            correctMomPedigreeNumberInput = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("The entered input is not in the proper format (only letters and digits - no spaces or special characters).");
+                        }
+                    }
                     //DadPedigreeNumber
-                    Console.Write("Please enter pedigree number of the dog's father: ");
-                    dog.DadPedigreeNumber = Console.ReadLine();
+                    bool correctDadPedigreeNumberInput = false;
+
+                    while (correctDadPedigreeNumberInput == false)
+                    {
+                        Console.Write("Please enter pedigree number of the dog's father: ");
+                        string inputDadPedigreeNumber = Console.ReadLine();
+
+                        if (Regex.IsMatch(inputDadPedigreeNumber, @"^[a-zA-Z0-9]+$")) // if there is no input to pedigreeNumber or in wrong format
+                        {
+                            dog.DadPedigreeNumber = inputDadPedigreeNumber;
+                            correctDadPedigreeNumberInput = true;
+                        }
+                        else if (string.IsNullOrEmpty(inputDadPedigreeNumber)) //Will accept no input and continue to next property insertion
+                        {
+                            correctDadPedigreeNumberInput = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("The entered input is not in the proper format (only letters and digits - no spaces or special characters).");
+                        }
+                    }
 
                     //Owner
                     Console.Write("Please enter name of the dog's owner: ");
