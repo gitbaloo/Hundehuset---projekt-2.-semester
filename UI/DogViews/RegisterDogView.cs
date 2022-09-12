@@ -29,16 +29,15 @@ namespace Hundehuset.UI.DogViews
                 Console.WriteLine("REGISTER NEW DOG");
                 Console.WriteLine("Enter 'X' to return to main menu.");
                 Console.Write("Please enter pedigree number: ");
-                var pedigreeNumber = Console.ReadLine();
+                var pedigreeNumber = Console.ReadLine().ToUpper();
 
-                if (pedigreeNumber.ToUpper() == "X") // x, will break the loop and return to NavigationView
+                if (pedigreeNumber == "X") // x, will break the loop and return to NavigationView
                 {
                     registerDogExit = true;
                 }
-                else if (!Regex.IsMatch(pedigreeNumber, @"^[a-zA-Z0-9]+$")) // if there is no input to pedigreeNumber or in wrong format
+                else if (!Regex.IsMatch(pedigreeNumber, @"^[a-zA-Z0-9]+$") || string.IsNullOrEmpty(pedigreeNumber)) // if there is no input to pedigreeNumber or in wrong format
                 {
                     Console.WriteLine("You must enter 'X' or a valid pedigree number (only letters and digits - no spaces or special characters)");
-                    Console.WriteLine("Press any key to continue.");
                     Console.ReadKey();
                 }
                 else if (!dogController.IsDogInDatabase(pedigreeNumber)) // no dog with the selected pedigreeNumber was found in our database
@@ -52,13 +51,7 @@ namespace Hundehuset.UI.DogViews
                     Console.WriteLine("ADDITIONAL INFO");
                     //Name
                     Console.Write("Please enter name of the dog: ");
-                    string inputName = Console.ReadLine();
-
-                    if (!string.IsNullOrEmpty(inputName)) //Dog will only be assigned a name if there is input
-                    {
-                        inputName = dog.Name;
-                    }
-
+                    dog.Name = Console.ReadLine();
 
                     //BirthDate
                     DateTime birthDate;
@@ -185,7 +178,7 @@ namespace Hundehuset.UI.DogViews
 
                     while (correctSpondylosisStatusInput == false)
                     {
-                        Console.Write("Please enter Spondylosis status: ");
+                        Console.Write("Please enter Spondylosis status (1-4): ");
                         string inputSpondylosisStatus = Console.ReadLine();
 
                         if (string.IsNullOrEmpty(inputSpondylosisStatus)) // there is no input
@@ -194,7 +187,7 @@ namespace Hundehuset.UI.DogViews
                         }
                         else if (int.TryParse(inputSpondylosisStatus, out spondylosisStatus)) // it is possible to parse the input to a char
                         {
-                            if (spondylosisStatus >= 1 || spondylosisStatus <= 4)
+                            if (spondylosisStatus >= 1 && spondylosisStatus <= 4)
                             {
                                 dog.SpondylosisStatus = spondylosisStatus;
                                 correctSpondylosisStatusInput = true;
@@ -218,7 +211,7 @@ namespace Hundehuset.UI.DogViews
 
                     while (correctHeartStatusInput == false)
                     {
-                        Console.Write("Please enter heart status: ");
+                        Console.Write("Please enter heart status (1-4): ");
                         string inputHeartStatus = Console.ReadLine();
 
                         if (string.IsNullOrEmpty(inputHeartStatus)) // there is no input
@@ -227,7 +220,7 @@ namespace Hundehuset.UI.DogViews
                         }
                         else if (int.TryParse(inputHeartStatus, out heartStatus)) // it is possible to parse the input to a char
                         {
-                            if (heartStatus >= 1 || heartStatus <= 4)
+                            if (heartStatus >= 1 && heartStatus <= 4)
                             {
                                 dog.HeartStatus = heartStatus;
                                 correctHeartStatusInput = true;
@@ -250,7 +243,7 @@ namespace Hundehuset.UI.DogViews
 
                     while (correctColorInput == false)
                     {
-                        Console.Write("Please enter color (RG, TG, RG/HV, TG/HV, ufarve): ");
+                        Console.Write("Please enter color (RG, TG, RG/HV, TG/HV, Ufarve): ");
                         string inputColor = Console.ReadLine().ToUpper();
 
                         if (string.IsNullOrEmpty(inputColor)) // there is no input
@@ -305,7 +298,7 @@ namespace Hundehuset.UI.DogViews
                     while (correctMomPedigreeNumberInput == false)
                     {
                         Console.Write("Please enter pedigree number of the dog's mother: ");
-                        string inputMomPedigreeNumber = Console.ReadLine();
+                        string inputMomPedigreeNumber = Console.ReadLine().ToUpper();
 
                         if (Regex.IsMatch(inputMomPedigreeNumber, @"^[a-zA-Z0-9]+$")) // if there is no input to pedigreeNumber or in wrong format
                         {
@@ -327,7 +320,7 @@ namespace Hundehuset.UI.DogViews
                     while (correctDadPedigreeNumberInput == false)
                     {
                         Console.Write("Please enter pedigree number of the dog's father: ");
-                        string inputDadPedigreeNumber = Console.ReadLine();
+                        string inputDadPedigreeNumber = Console.ReadLine().ToUpper();
 
                         if (Regex.IsMatch(inputDadPedigreeNumber, @"^[a-zA-Z0-9]+$")) // if there is no input to pedigreeNumber or in wrong format
                         {

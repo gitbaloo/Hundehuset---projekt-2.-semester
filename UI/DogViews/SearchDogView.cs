@@ -55,7 +55,7 @@ namespace Hundehuset.UI.DogViews
                     //If it does exist:
                     else
                     {
-                        Dog existingDog = dogController.GetDog(pedigreeNumber); //We instantiate a dog 'existingDog' that has the attributes of the dog that the dogController got for us
+                        Dog existingDog = dogController.GetDog(pedigreeNumber); //We create a reference to a dog that the dogController got for us
                         Console.Clear();
                         showDogView.ShowView(existingDog); //We call the method for showing the attributes of existingDog - the dog's profile.
                         Console.WriteLine();
